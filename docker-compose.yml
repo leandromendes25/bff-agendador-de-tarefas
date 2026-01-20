@@ -1,0 +1,73 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db_usuario
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+
+  usuario:
+    build: ../usuario
+    container_name: usuario
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/db_usuario
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  agendador-tarefas:
+    build: ../agendador-de-tarefas
+    container_name: agendador-tarefas
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/db_agendador
+    depends_on:
+      - mongo
+
+  notificacao:
+    build: ../notificação
+    container_name: notificacao
+    ports:
+      - "8082:8082"
+
+  bff-agendador-tarefas:
+    build: .
+    container_name: bff-agendador-tarefas
+    ports:
+      - "8083:8083"
+    environment:
+      USUARIO_URL: http://usuario:8080/usuario
+      AGENDADOR_TAREFAS_URL: http://agendador-tarefas:8081/tarefas
+      NOTIFICACAO_URL: http://notificacao:8082/email
+    depends_on:
+      - usuario
+      - agendador-tarefas
+      - notificacao
+
+networks:
+  default:
+    driver: bridge
