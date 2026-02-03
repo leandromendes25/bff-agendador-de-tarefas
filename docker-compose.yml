@@ -49,7 +49,7 @@ services:
       - mongo
 
   notificacao:
-    build: ../notificação
+    build: ../notificacao
     container_name: notificacao
     ports:
       - "8082:8082"

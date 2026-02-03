@@ -9,22 +9,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfig {
 
     @Bean
-    public WebMvcConfigurer configCors(CorsRegistry registry){
-
+    public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                //addMapping adiciona essas configurações para todos os endpoints
-                //** vai estar pegando todos, se caso quissemos que fosse só pra login
-                //seria /usuario/login
                 registry.addMapping("/**")
-                        .allowedOrigins("https://localhost:4200")//qual a origem que vai poder acessar
-                        .allowedMethods("GET","POST","DELETE","PATCH")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("GET", "POST", "DELETE", "PATCH")
                         .allowedHeaders("*")
-                        .allowCredentials(true)//permitir cookies no authorization
-                        .maxAge(360);//tempo q o navegador vai cachear essa app, 360 é o padrão
+                        .allowCredentials(true)
+                        .maxAge(360);
             }
         };
-
     }
 }
