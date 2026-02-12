@@ -1,6 +1,6 @@
 # 🚀 Sistema de Microserviços - Agendador de Tarefas
 
-Projeto desenvolvido com o objetivo de estudar e aplicar conceitos de **arquitetura de microserviços**, utilizando **Java, Spring Boot e boas práticas de desenvolvimento back-end**.
+Projeto desenvolvido com o objetivo de estudar e aplicar conceitos de **arquitetura de microserviços**, utilizando **Java, Spring Boot e boas práticas de desenvolvimento back-end e de front utilizando Angular Js.**.
 
 O sistema é composto por múltiplos serviços independentes que se comunicam entre si, cada um responsável por um contexto específico do domínio.
 
@@ -81,9 +81,17 @@ Responsável por:
 - Simplificar consumo da API pelo cliente
 
 Este repositório
-
 ---
 
+### Frontend
+
+Responsável por:
+
+- Fazer a comunicação entre o backend e o front
+- Ser amigável com o usuário final
+
+Repositório:
+👉 https://github.com/leandromendes25/agendador-tarefas-front
 ## 🔁 Comunicação Entre Serviços
 
 A comunicação entre microserviços é realizada via **OpenFeign**, permitindo chamadas REST entre serviços de forma simples e desacoplada.
@@ -126,12 +134,10 @@ microservices-project
 ▶️ Como Executar
 
 Pré-requisitos:
-
 + Java 21
-
 + Docker
-
 + Docker Compose
++ Angular Js 21
 
 Passos:
 
@@ -140,36 +146,31 @@ git clone git@github.com:leandromendes25/bff-agendador-de-tarefas.git
 git clone git@github.com:leandromendes25/agendador-de-tarefas.git
 git clone git@github.com:leandromendes25/usuario.git
 git clone git@github.com:leandromendes25/notificacao.git
+git clone git@github.com:leandromendes25/agendador-tarefas-front.git
 cd bff-agendador-de-tarefas
 docker-compose up -d
+
+em outra aba do terminal
+cd agendador-tarefas-front
+npm install
+ng serve
 ```
 🔧 Tecnologias Utilizadas
-
 + Java
-
 + Spring Boot
-
 + Spring Security
-
 + JWT
-
 + Spring Data JPA
-
 + PostgreSQL
-
 + MongoDB
-
 + OpenFeign
-
 + Docker
-
 + Docker Compose
-
 + Maven
-
 + Gradle
-
 + Git
++ Node.js
++ Angular
 
 🎯 Objetivo do Projeto
 
@@ -184,3 +185,6 @@ Comunicação entre serviços
 Organização de código
 
 Boas práticas
+
+Teste sua aplicação pelo Swagger
+http://localhost:8083/swagger-ui/index.html
