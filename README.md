@@ -16,21 +16,6 @@ O projeto segue arquitetura de microserviços, onde cada serviço possui:
 - Banco de dados próprio
 - Comunicação via REST utilizando OpenFeign
 
-Arquitetura geral:
-
-[ Client / Frontend ]
-|
-v
-[ BFF ]
-|
-| Auth/User Service |
-| Task Scheduler Service |
-| Email Service |
-[ Databases ]
-
-
----
-
 ## 🧩 Microserviços
 
 ### 🔐 User Service (Autenticação)
